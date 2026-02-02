@@ -6,7 +6,7 @@ export default function Index() {
     <View
       className="flex flex-1 justify-center items-center"
     >
-     <Link href ='/(root)/(tabs)/Archive'>Archive</Link>
+     <Text>Welcome to Smart Task Manager</Text>
     </View>
   );
 }

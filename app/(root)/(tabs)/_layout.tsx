@@ -1,32 +1,61 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Tabs } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
+import React from "react";
+import { Tabs, router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Text, View, TouchableOpacity } from "react-native";
 
 const TabIcon = ({
   focused,
   name,
   title,
 }: {
-  focused: boolean
-  name: keyof typeof Ionicons.glyphMap
-  title: string
-}) => (
-  <View className="items-center justify-center mt-2">
-    <Ionicons
-      name={name}
-      size={24}
-      color={focused ? '#0061FF' : '#9CA3AF'}
-    />
-    <Text
-      className={`text-xs mt-1 ${
-        focused ? 'text-blue-600 font-semibold' : 'text-gray-400'
-      }`}
+  focused: boolean;
+  name: keyof typeof Ionicons.glyphMap;
+  title: string;
+}) => {
+  return (
+    <View className="items-center justify-center w-16">
+      <Ionicons
+        name={name}
+        size={24}
+        color={focused ? "#0061FF" : "#9CA3AF"}
+      />
+      <Text
+        numberOfLines={1}
+        className={`text-[11px] mt-1 text-center ${
+          focused ? "text-blue-600 font-semibold" : "text-gray-400"
+        }`}
+      >
+        {title}
+      </Text>
+    </View>
+  );
+};
+
+const AddButton = () => {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.85}
+      onPress={() => router.push("/add-task")}
+      style={{
+        width: 60,
+        height: 60,
+        borderRadius: 32,
+        backgroundColor: "#0061FF",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 30,
+        shadowColor: "#0061FF",
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 8,
+        marginLeft:8
+      }}
     >
-      {title}
-    </Text>
-  </View>
-)
+      <Ionicons name="add" size={32} color="#fff" />
+    </TouchableOpacity>
+  );
+};
 
 const TabsLayout = () => {
   return (
@@ -36,10 +65,14 @@ const TabsLayout = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 70,
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
           borderTopWidth: 1,
-          borderTopColor: '#E5E7EB',
-          position: 'absolute',
+          borderTopColor: "#E5E7EB",
+        },
+        tabBarItemStyle: {
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: 6,
         },
       }}
     >
@@ -49,7 +82,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              name={focused ? 'home' : 'home-outline'}
+              name={focused ? "home" : "home-outline"}
               title="Home"
             />
           ),
@@ -62,12 +95,22 @@ const TabsLayout = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              name={focused ? 'star' : 'star-outline'}
+              name={focused ? "star" : "star-outline"}
               title="Important"
             />
           ),
         }}
       />
+
+     <Tabs.Screen
+  name="add-task"
+  options={{
+    tabBarLabel: () => null,
+    tabBarIcon: () => null,
+    tabBarButton: () => <AddButton />,
+  }}
+/>
+
 
       <Tabs.Screen
         name="archive"
@@ -75,7 +118,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              name={focused ? 'archive' : 'archive-outline'}
+              name={focused ? "archive" : "archive-outline"}
               title="Archive"
             />
           ),
@@ -88,14 +131,14 @@ const TabsLayout = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              name={focused ? 'settings' : 'settings-outline'}
+              name={focused ? "settings" : "settings-outline"}
               title="Settings"
             />
           ),
         }}
       />
     </Tabs>
-  )
-}
+  );
+};
 
-export default TabsLayout
+export default TabsLayout;
