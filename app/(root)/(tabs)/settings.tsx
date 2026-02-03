@@ -63,7 +63,7 @@ const Settings = () => {
         <TouchableOpacity className="ml-4" onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={22} color="#000" />
         </TouchableOpacity>
-        <Text className="flex-1 text-center font-semibold text-lg mr-8">
+        <Text className="flex-1 text-center font-semibold text-lg mr-10">
           Settings
         </Text>
       </View>
