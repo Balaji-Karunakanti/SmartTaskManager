@@ -36,25 +36,7 @@ State Management
 
 React useState & useEffect
 
-📂 Project Structure
-smartRemainder/
-├── app/
-│   ├── (tabs)/
-│   │   ├── home.tsx
-│   │   ├── tasks.tsx
-│   │   ├── important.tsx
-│   │   ├── archive.tsx
-│   │   └── settings.tsx
-│   ├── add-task.tsx
-│   └── task-details.tsx
-├── components/
-│   ├── TaskCard.tsx
-│   └── Header.tsx
-├── assets/
-├── constants/
-├── hooks/
-├── package.json
-└── README.md
+
 
 🚀 Getting Started
 Prerequisites
