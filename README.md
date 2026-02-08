@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+SmartRemainder is a modern task and reminder management mobile application built using React Native and Expo.
+It helps users organize their daily tasks, mark important items, archive completed work, and manage reminders — all through a clean and intuitive UI.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+✨ Features
 
-## Get started
+📋 Create, Edit & Delete Tasks
 
-1. Install dependencies
+⭐ Mark Tasks as Important
 
-   ```bash
-   npm install
-   ```
+🗂️ Archive Tasks for later reference
 
-2. Start the app
+✅ Track Completed Tasks
 
-   ```bash
-   npx expo start
-   ```
+⏰ Date & Time Picker for Reminders
 
-In the output, you'll find options to open the app in a
+⚙️ Settings Screen to customize preferences
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+🧭 Tab-based Navigation (Home, Tasks, Important, Archive, Settings)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+📱 Responsive & Clean UI built with NativeWind (Tailwind for React Native)
 
-## Get a fresh project
+🛠️ Tech Stack
+Frontend
 
-When you're ready, run:
+React Native
 
-```bash
-npm run reset-project
-```
+Expo
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Expo Router (Navigation)
 
-## Learn more
+NativeWind (Tailwind CSS for styling)
 
-To learn more about developing your project with Expo, look at the following resources:
+Ionicons (Icons)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+State Management
 
-## Join the community
+React useState & useEffect
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+🚀 Getting Started
+Prerequisites
+
+Node.js installed
+
+Expo CLI installed
+
+npm install -g expo-cli
+
+Installation
+git clone https://github.com/your-username/smartRemainder.git
+cd smartRemainder
+npm install
+
+Run the App
+expo start
+
+
+Scan the QR code using Expo Go on your mobile device or run it on an emulator.
+
+🧩 Key Screens
+
+Home – Overview of tasks
+
+Tasks – All active tasks
+
+Important – Starred tasks
+
+Archive – Archived tasks
+
+Add / Edit Task – Task details with date & time picker
+
+Settings – App preferences and controls
+
+🎯 Use Cases
+
+Students managing assignments and deadlines
+
+Professionals tracking daily work tasks
+
