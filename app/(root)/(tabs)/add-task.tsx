@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
+
+
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   Switch,
+  Alert
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import { useTasks } from "@/context/TaskContext";
 
 export default function AddTaskScreen() {
-  /* ---------------- STATES ---------------- */
+  /* ---------------- SHARED TASK STATE ---------------- */
+
+  const { tasks, setTasks } = useTasks();
+
+  /* ---------------- LOCAL STATES ---------------- */
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -29,46 +37,6 @@ export default function AddTaskScreen() {
 
   const [isValid, setIsValid] = useState(false);
 
-  /* ---------------- TASK ARRAY ---------------- */
-
-  const [tasks, setTasks] = useState<any[]>([]);
-
-  /* ---------------- TEMP DATA (FOR TESTING) ---------------- */
-
-  useEffect(() => {
-    const tempTasks = [
-      {
-        id: 1,
-        title: "Buy groceries",
-        description: "Milk, Bread, Eggs",
-        deadline: {
-          date: new Date(),
-          time: new Date(),
-        },
-        important: true,
-        reminderEnabled: true,
-        reminderTiming: "10 mins before",
-        createdAt: new Date(),
-      },
-      {
-        id: 2,
-        title: "Study React Native",
-        description: "Work on Add Task screen",
-        deadline: {
-          date: new Date(),
-          time: new Date(),
-        },
-        important: false,
-        reminderEnabled: false,
-        reminderTiming: null,
-        createdAt: new Date(),
-      },
-    ];
-
-    setTasks(tempTasks);
-    console.log("Initial Tasks:", tempTasks);
-  }, []);
-
   /* ---------------- VALIDATION ---------------- */
 
   useEffect(() => {
@@ -81,7 +49,7 @@ export default function AddTaskScreen() {
     if (!isValid) return;
 
     const newTask = {
-      id: Date.now(), // simple unique id
+      id: Date.now(),
       title,
       description,
       deadline: {
@@ -94,24 +62,43 @@ export default function AddTaskScreen() {
       createdAt: new Date(),
     };
 
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks((prevTasks: any[]) => [...prevTasks, newTask]);
 
-    console.log("New Task Added:", newTask);
     console.log("All Tasks:", [...tasks, newTask]);
 
-    // reset form (optional but logical)
+    // reset form
     setTitle("");
     setDescription("");
     setImportant(false);
     setReminderEnabled(false);
     setDate(new Date());
     setTime(new Date());
+
+     Alert.alert(
+    "Task Added ✅",
+    "Your task has been added successfully.",
+    [
+      {
+        text: "OK",
+        onPress: () => router.back(), // optional: go back to Home
+      },
+    ]
+  );
+
+  // reset form
+  setTitle("");
+  setDescription("");
+  setImportant(false);
+  setReminderEnabled(false);
+  setDate(new Date());
+  setTime(new Date());
   };
 
   /* ---------------- UI ---------------- */
 
   return (
     <SafeAreaView className="flex flex-1">
+      {/* Header */}
       <View className="flex-row items-center py-4">
         <TouchableOpacity className="ml-4" onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={22} color="#000" />
@@ -122,7 +109,7 @@ export default function AddTaskScreen() {
       </View>
 
       <View className="flex-1 bg-white px-5 pt-4">
-        {/* -------- Task Title -------- */}
+        {/* Task Title */}
         <Text className="text-base font-semibold mb-1">
           Task Title <Text className="text-red-500">*</Text>
         </Text>
@@ -133,7 +120,7 @@ export default function AddTaskScreen() {
           className="border border-gray-300 rounded-xl px-4 py-3 text-base mb-4"
         />
 
-        {/* -------- Description -------- */}
+        {/* Description */}
         <Text className="text-base font-semibold mb-1">Description</Text>
         <TextInput
           placeholder="Add task details..."
@@ -143,7 +130,7 @@ export default function AddTaskScreen() {
           className="border border-gray-300 rounded-xl px-4 py-4 h-28 text-base mb-6"
         />
 
-        {/* -------- Deadline -------- */}
+        {/* Deadline */}
         <Text className="text-lg font-semibold mb-3">Deadline</Text>
 
         <View className="flex-row gap-4 mb-6">
@@ -181,7 +168,7 @@ export default function AddTaskScreen() {
           </View>
         </View>
 
-        {/* -------- Important -------- */}
+        {/* Important */}
         <View className="flex-row justify-between items-center bg-gray-50 rounded-xl px-4 py-4 mb-3">
           <View className="flex-row items-center gap-3">
             <Ionicons name="star" size={22} color="#facc15" />
@@ -190,7 +177,7 @@ export default function AddTaskScreen() {
           <Switch value={important} onValueChange={setImportant} />
         </View>
 
-        {/* -------- Reminder -------- */}
+        {/* Reminder */}
         <View className="bg-gray-50 rounded-xl px-4 py-4 mb-4">
           <View className="flex-row justify-between items-center">
             <View className="flex-row items-center gap-3">
@@ -213,12 +200,12 @@ export default function AddTaskScreen() {
           )}
         </View>
 
-        {/* -------- Created Date -------- */}
+        {/* Created Date */}
         <Text className="text-center text-gray-400 mb-6">
           Created on: {new Date().toDateString()}
         </Text>
 
-        {/* -------- Create Button -------- */}
+        {/* Create Button */}
         <TouchableOpacity
           disabled={!isValid}
           onPress={handleCreateTask}
@@ -232,7 +219,7 @@ export default function AddTaskScreen() {
           </Text>
         </TouchableOpacity>
 
-        {/* -------- Date Picker -------- */}
+        {/* Date Picker */}
         {showDatePicker && (
           <DateTimePicker
             value={date}
@@ -244,7 +231,7 @@ export default function AddTaskScreen() {
           />
         )}
 
-        {/* -------- Time Picker -------- */}
+        {/* Time Picker */}
         {showTimePicker && (
           <DateTimePicker
             value={time}

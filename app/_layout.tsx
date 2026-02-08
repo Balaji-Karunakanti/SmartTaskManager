@@ -1,5 +1,11 @@
 import { Stack } from "expo-router";
-import './global.css'
+import "./global.css";
+import { TaskProvider } from "@/context/TaskContext";
+
 export default function RootLayout() {
-  return <Stack screenOptions={{headerShown:false}} />;
+  return (
+    <TaskProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </TaskProvider>
+  );
 }
